@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Grenze+Gotisch:wght@600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Grandstander:wght@100&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <title>KingBook</title>
 </head>
 <body>
+
     <div class="box" id="heading">
             <h1>Stephen King books</h1>
     </div>
@@ -14,21 +17,41 @@
     <div class="box">
         <form class="book" action="/" method="POST">
             <input class="input" type="text" name="newBook">
-            <button class="button" type="submit">+</button>
+            <button class="button" type="submit">Add book</button>
         </form>
     </div>
 
-   <div class="list">
+    <div class="counter">
+         <p class="block"></p>
+    </div>
+   
+  
+    <div class="list">
    <% bookItems.forEach(function(bookItem){ %>
-        <form action="/" method="post">
+        <form action="/update" method="post">
             <div class="bookItem">
-                <input type="checkbox" name="checkbox">
-                <p><%= bookItem.name %></p>
+                <% if(bookItem.checked == 0 ) {  %>
+                    <input id="<%= bookItem._id %>" class="checked" type="checkbox" name="checkbox" onchange="this.form.submit()" hidden>
+                <% } else { %>
+                    <input id="<%= bookItem._id %>" class="checked" type="checkbox" name="checkbox" checked onchange="this.form.submit()" hidden>
+                <% } %>
+                <span class="check"></span>
+                <label for="<%= bookItem._id %>" data-bookid="<%= bookItem._id %>"><%= bookItem.name %> </label>
+                <input type="text" name="bookName" value="<%= bookItem.name %>" data-bookid="<%= bookItem._id %>" class="bookName" hidden>
             </div>
-          </form>    
+            <hr>
+            <input type="text" name="bookId" value="<%= bookItem._id %>" hidden>
+        </form>    
+        <form action="/delete" method="post">
+            <input class="trash" type="image" src="/image/delete.svg" alt=""  onchange="this.form.submit()">
+            <input type="text" name="trash" value="<%= bookItem._id %>" hidden>
+            <!-- <input id="trash" type="checkbox" name="trash" onchange="this.form.submit()">  -->
+        </form>
+        <input class="pen" type="image" src="/image/pen.svg" data-bookid="<%= bookItem._id %>" onchange="this.form.submit()">
   <% }) %>
     </div>
 
+    <script src="js/list.js"></script>
 </body>
 <footer>
     Copyright 2020.
