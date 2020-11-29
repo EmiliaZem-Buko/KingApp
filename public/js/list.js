@@ -8,8 +8,7 @@ function howMany() {
     const count = document.querySelector(".block");
 
     count.innerHTML = checkedBoxes.length + "/" + checkboxes.length;
-
-}
+} howMany();
 
 function editBookName() {
     const bookID = this.dataset.bookid;

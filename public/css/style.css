@@ -189,6 +189,14 @@ hr {
     height: 17px;
 }
 
+.icons {
+    margin-left: 275px;
+    margin-top: -25px;
+
+    display: flex;
+}
+
+
 p {
     margin: 0;
 }

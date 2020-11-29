@@ -15,12 +15,16 @@ const bookSchema = {
 
 const Book = mongoose.model("Book", bookSchema);
 
+//  
+
 app.get("/", function (req, res) {
 
     Book.find({}, function (err, foundBooks) {
         res.render("list", { bookItems: foundBooks});
     });
 });
+
+// ADDING BOOK AND CHECKBOX TO DATABASE
 
 app.post("/", function (req, res) {
 
@@ -37,6 +41,8 @@ app.post("/", function (req, res) {
    res.redirect("/");
 });
 
+// CHANGE NAME AND CHECKED CHECKBOX
+
 app.post("/update", function (req, res) {
 
     const bookId = req.body.bookId;
@@ -51,9 +57,14 @@ app.post("/update", function (req, res) {
         res.redirect("/");
     });
 
+    console.log('/update');
+    console.group();
     console.log(req.body);
+    console.groupEnd();
 
 });
+
+// REMOVE ITEM 
 
 app.post("/delete", function (req, res) {
 
